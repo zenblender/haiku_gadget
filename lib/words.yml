@@ -1,9 +1,4 @@
 ---
-# :transition: [
-#     [so, and, or, plus, but, 'still,', 'yet,', while, when, if, then, only, 'thus,', 'hence,', now, 'yes,', 'no,', 'oh,', 'uh,', 'yea,', 'nah,'],
-#     ['therefore,', 'likewise,', 'besides,', although, 'truly,', 'in fact,', because, in case]
-#   ]
-
 :transition_join: [
     [so, and, or, plus, but, yet, while, when, if, then, thus, hence, now]
   ]
@@ -104,9 +99,6 @@
     [simplify, stabilize, testify]
   ]
 
-# because there are so few one-syllable adverbs, templates must specify at least 2 syllables for
-# an adverb in order for it to ever be used in a haiku
-# (otherwise it will not continue to look after finding the empty set of 1-syllable adverbs)
 :adverb: [
     [great, well, good, bad, fast, slow, up, down, soon, now, nice, left, right, wrong, some],
     [always, badly, blindly, boldly, bravely, brightly, clearly, deftly, kindly, loosely, madly, never, oddly, often, only, poorly, sadly, promptly, quickly, rarely, really, rudely, safely, seldom, slowly, sometimes, warmly, yearly],

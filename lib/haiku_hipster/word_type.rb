@@ -35,9 +35,6 @@ module HaikuHipster
 
     def get_word(syllables, plurality = :none)
       if base_symbol == :custom
-
-        #puts "get custom word from: #{@custom_words.inspect}"
-
         @custom_words.sample
       else
         Dictionary.get_word self, syllables, plurality

@@ -139,7 +139,6 @@ module HaikuHipster
           while HaikuTemplate.row_syllables(@template_matrix[i]) < syllables[i]
             increased_syllable_index = HaikuTemplate.increase_row_syllable(@template_matrix[i])
             break if increased_syllable_index.nil?
-            # TODO: return nil if syllable can't be completed, implying incomplete dict or unrealistic template, raise error
           end
         end
       end
@@ -148,11 +147,6 @@ module HaikuHipster
         words = []
         word_templates.each do |word_template|
           if word_template.syllables > 0
-            # word = Dictionary.get_word(
-            #   word_template.word_type,
-            #   word_template.syllables,
-            #   word_template.plurality
-            # )
             word = word_template.word_type.get_word(
               word_template.syllables,
               word_template.plurality
@@ -179,7 +173,6 @@ module HaikuHipster
       end
 
       def self.increase_row_syllable(word_templates)
-        #valid_word_indices = (0...word_templates.length).to_a
         valid_word_indices = HaikuTemplate.get_valid_word_indices word_templates
 
         increase_syllable_index = nil
@@ -207,13 +200,6 @@ module HaikuHipster
       def self.increased_row_syllable_index(word_templates, valid_word_indices)
         if valid_word_indices.length > 0
           word_index = valid_word_indices.sample
-
-
-          # if Dictionary.words?(
-          #   word_templates[word_index].word_type,
-          #   word_templates[word_index].syllables + 1,
-          #   word_templates[word_index].plurality
-          # )
           if word_templates[word_index].word_type.words?(
             word_templates[word_index].syllables + 1,
             word_templates[word_index].plurality

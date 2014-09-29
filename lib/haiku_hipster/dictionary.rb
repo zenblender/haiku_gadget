@@ -1,7 +1,5 @@
 require 'yaml'
 
-require 'awesome_print'
-
 require File.expand_path('word_type.rb', File.dirname(__FILE__))
 
 module HaikuHipster
@@ -11,7 +9,6 @@ module HaikuHipster
     DEFAULT_DICT_PATH = '../words.yml'
 
     WORD_TYPES = {
-#      transition:             WordType.new(:transition),
       determiner:             WordType.new(:determiner, true),
       to_be:                  WordType.new(:to_be, true),
       adjective:              WordType.new(:adjective, true),
@@ -21,15 +18,14 @@ module HaikuHipster
       verb:                   WordType.new(:verb, true, :singular),
       verb_self:              WordType.new(:verb_self, true, :singular),
       adverb:                 WordType.new(:adverb),
-      transition_join:        WordType.new(:transition_join)#,
-      #custom:                 WordType.new(:custom)
+      transition_join:        WordType.new(:transition_join)
     }
 
     def self.suffixed_symbol(base_symbol, suffix_symbol)
       "#{base_symbol.to_s}_#{suffix_symbol.to_s}".to_sym
     end
 
-    # copies words from _common into _singular and _plural, then deletes _common
+    # copies words from _common into _singular and _plural
     # modifies dict structure in place, doesn't return anything of consequence
     def self.complete_plurality(dict, word_type)
 
@@ -70,8 +66,6 @@ module HaikuHipster
         dict[symbol].each_index do |i|
           if word_type.add_s_target == plural_symbol
             # currently building a list in which the words should have an 's' added when copying from _common
-            
-            #dict[symbol][i] += dict[common_symbol][i].map { |w| "#{w}s" } if dict[common_symbol][i]
             dict[symbol][i] += Dictionary.add_s_to_all(dict[common_symbol][i]) if dict[common_symbol][i]
           else
             # not adding an 's' in this case, or building the singular word list
@@ -79,9 +73,6 @@ module HaikuHipster
           end
         end
       end
-
-      # remove unneeded 'common' array
-      #dict.delete common_symbol
 
     end
 
@@ -131,8 +122,6 @@ module HaikuHipster
 
       # validate syllables input
       return nil unless syllables.is_a?(Fixnum) && syllables > 0
-
-      #return word_type.custom_words.sample if word_type.base_symbol == :custom
 
       dict_symbol = word_type.dict_symbol plurality
       if @@dict[dict_symbol] && @@dict[dict_symbol][syllables - 1]
