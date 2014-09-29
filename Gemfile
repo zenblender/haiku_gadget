@@ -5,9 +5,11 @@ gem 'rails_12factor', '~> 0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
 
+gem 'pg', '~> 0.17'
+
 group :production do
 
-  gem 'pg', '~> 0.17'
+  # gem 'pg', '~> 0.17'
   
 end
 
