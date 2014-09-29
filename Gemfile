@@ -39,6 +39,8 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'pg', '~> 0.17'
+
 gem 'pry-rails', '~> 0.3'
 gem 'awesome_print'
 gem 'rspec-rails', '~> 3.1'
