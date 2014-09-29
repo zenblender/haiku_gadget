@@ -1,16 +1,17 @@
 source 'https://rubygems.org'
 
-gem 'rails_12factor', '~> 0.0'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
 
-gem 'pg', '~> 0.17'
+
 
 group :production do
 
   # gem 'pg', '~> 0.17'
-  
+  gem 'rails_12factor', '~> 0.0'
+
 end
 
 group :development, :test do
@@ -18,7 +19,11 @@ group :development, :test do
   # Use sqlite3 as the database for Active Record
   #gem 'sqlite3'
 
+  gem 'rspec-rails', '~> 3.1'
+
 end
+
+gem 'pg', '~> 0.17'
 
 # Use SCSS for stylesheets
 #gem 'sass-rails', '~> 4.0.3'
@@ -56,7 +61,7 @@ gem 'spring',        group: :development
 
 gem 'pry-rails', '~> 0.3'
 gem 'awesome_print'
-gem 'rspec-rails', '~> 3.1'
+
 
 gem 'sass-rails', '~> 4.0'
 gem 'bootstrap-sass', '~> 3.2'
