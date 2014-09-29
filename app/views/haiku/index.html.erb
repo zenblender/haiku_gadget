@@ -1,0 +1,50 @@
+<div class="jumbotron">
+
+  <h1>haiku hipster</h1>
+
+  <table>
+  
+    <tr>
+      <td>
+        <h1>
+          <% @haiku_lines.each_index do |i| %>
+            <div><%= link_to '&#10226;'.html_safe, random_line_path(i), remote: true, class: 'btn btn-default btn-lg' %></div>
+          <% end %>
+        </h1>
+      </td>
+      <td><h1>&nbsp;&nbsp;</h1></td>
+      <td class="haiku">
+        <h1>
+          <% @haiku_lines.each_index do |i| %>
+            <div id="line_<%= i %>"><%= @haiku_lines[i] %></div>
+          <% end %>
+        </h1>
+      </td>
+      <td><h1>&nbsp;&nbsp;</h1></td>
+      <td>
+        <h1>
+          <div>&nbsp;</div>
+          <div><%= link_to '&#8645;'.html_safe, '', remote: true, id: 'reverse', class: 'btn btn-default btn-lg' %></div>
+          <div>&nbsp;</div>
+        </h1>
+      </td>
+    </tr>
+  </table>
+
+  <br/><br/>
+
+
+  
+  <%= link_to '&#10226; all'.html_safe, randomize_path, remote: true, class: 'btn btn-primary btn-lg' %>
+
+  <script type="text/javascript">
+    $('#reverse').click(function(){
+      top_line = $('#line_0').html();
+      $('#line_0').html($('#line_2').html());
+      $('#line_2').html(top_line);
+    });
+  </script>
+
+
+</div>
+

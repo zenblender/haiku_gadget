@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+
+  root 'haiku#index'
+
+  get '/randomize' => 'haiku#randomize', as: 'randomize'
+  get '/random_line/:line' => 'haiku#random_line', as: 'random_line'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

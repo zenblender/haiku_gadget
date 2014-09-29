@@ -1,0 +1,23 @@
+---
+:determiner_common: [
+    [the]
+  ]
+:adjective_common: [
+    [red],
+    [orange]
+  ]
+:noun_common: [
+    [thing],
+    [zombie],
+    [samurai]
+  ]
+:verb_common: [
+    [see],
+    [attack],
+    [decipher]
+  ]
+:verb_self_common: [
+    [fight],
+    [travel],
+    [meditate]
+  ]
