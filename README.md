@@ -4,6 +4,8 @@ Generate random haikus!
 
 Uses an algorithm, a custom dictionary, some grammar rules, and a team of hamsters running in wheels.
 
+### Play with it at [haikugadget.com](http://www.haikugadget.com/)
+
 ## What is a haiku?
 
 A short poem consisting of three lines:
