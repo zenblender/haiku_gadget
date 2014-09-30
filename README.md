@@ -1,15 +1,16 @@
 # Haiku Gadget
 
 Generate random haikus!
+
 Uses an algorithm, a custom dictionary, some grammar rules, and a team of hamsters running in wheels.
 
 ## What is a haiku?
 
 A short poem consisting of three lines:
 
-five syllables here
-then seven syllables here
-then five syllables
+    five syllables here
+    then seven syllables here
+    then five syllables
 
 ## Installation
 
