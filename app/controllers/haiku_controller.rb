@@ -1,16 +1,16 @@
-require 'haiku_hipster'
+require 'haiku_gadget'
 
 class HaikuController < ApplicationController
 
   def index
 
-    @haiku_lines = HaikuHipster.haiku
+    @haiku_lines = HaikuGadget.haiku
 
   end
 
   def randomize
 
-    @lines = HaikuHipster.haiku
+    @lines = HaikuGadget.haiku
     respond_to do |format|
       format.js
     end
@@ -20,7 +20,7 @@ class HaikuController < ApplicationController
   def random_line
 
     @line_index = params[:line]
-    @line = HaikuHipster.random_line @line_index.to_i
+    @line = HaikuGadget.random_line @line_index.to_i
     respond_to do |format|
       format.js
     end

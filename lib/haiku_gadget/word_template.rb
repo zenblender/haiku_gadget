@@ -1,6 +1,6 @@
 require File.expand_path('word_type.rb', File.dirname(__FILE__))
 
-module HaikuHipster
+module HaikuGadget
 
   class WordTemplate
 
@@ -9,7 +9,7 @@ module HaikuHipster
 
     def initialize(base_symbol_or_word_type, syllables = 0, plurality = :none, obj_num = 0)
 
-      if base_symbol_or_word_type.is_a? HaikuHipster::WordType
+      if base_symbol_or_word_type.is_a? HaikuGadget::WordType
         # use provided (custom) WordType
         word_type = base_symbol_or_word_type
       else

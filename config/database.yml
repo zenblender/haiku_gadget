@@ -11,7 +11,7 @@ default: &default
 development:
   <<: *default
   adapter: postgresql
-  database: development_haikuhipster
+  database: development_haiku_gadget
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -19,9 +19,9 @@ development:
 test:
   <<: *default
   adapter: postgresql
-  database: test_haikuhipster
+  database: test_haiku_gadget
 
 production:
   <<: *default
   adapter: postgresql
-  database: production_haikuhipster
+  database: production_haiku_gadget

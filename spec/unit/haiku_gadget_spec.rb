@@ -1,6 +1,6 @@
-module HaikuHipster
+module HaikuGadget
 
-  describe 'HaikuHipster' do
+  describe 'HaikuGadget' do
 
     describe 'with default dictionary' do
 
@@ -82,7 +82,7 @@ module HaikuHipster
 
         10.times do
           # do 10 times so the plurality randomization hits multiple possibilities
-          haiku_lines = HaikuHipster.haiku_lines haiku_template
+          haiku_lines = HaikuGadget.haiku_lines haiku_template
 
           expect(haiku_lines[0]).to eq('red thing meditates')
           expect(haiku_lines[1]).to eq('the samurais see zombie')
@@ -98,9 +98,9 @@ module HaikuHipster
 
         10.times do
           # do 10 times so the plurality randomization hits multiple possibilities
-          top_line = HaikuHipster.top_line haiku_template.template_matrix[0]
-          middle_line = HaikuHipster.middle_line haiku_template.template_matrix[1]
-          bottom_line = HaikuHipster.bottom_line haiku_template.template_matrix[2]
+          top_line = HaikuGadget.top_line haiku_template.template_matrix[0]
+          middle_line = HaikuGadget.middle_line haiku_template.template_matrix[1]
+          bottom_line = HaikuGadget.bottom_line haiku_template.template_matrix[2]
 
           haiku = [top_line, middle_line, bottom_line].join(' | ')
 
@@ -132,7 +132,7 @@ module HaikuHipster
           [WordTemplate.new(:mass_noun, 5)]
         ]
 
-        haiku = HaikuHipster.haiku nil, haiku_template
+        haiku = HaikuGadget.haiku nil, haiku_template
 
         puts "haiku from deeply-nested words: #{haiku.join(' | ')}"
 

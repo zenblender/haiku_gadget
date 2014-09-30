@@ -1,7 +1,7 @@
 require File.expand_path('word_template.rb', File.dirname(__FILE__))
 require File.expand_path('dictionary.rb', File.dirname(__FILE__))
 
-module HaikuHipster
+module HaikuGadget
 
   class HaikuTemplate
 

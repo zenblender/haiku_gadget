@@ -2,7 +2,7 @@ require 'yaml'
 
 require File.expand_path('word_type.rb', File.dirname(__FILE__))
 
-module HaikuHipster
+module HaikuGadget
 
   module Dictionary
 

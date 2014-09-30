@@ -1,9 +1,9 @@
-require File.expand_path('lib/haiku_hipster.rb', File.dirname(__FILE__))
+require File.expand_path('lib/haiku_gadget.rb', File.dirname(__FILE__))
 
 1000.times do
-#  puts HaikuHipster.haiku "\n"
-  puts HaikuHipster.top_line
-  puts HaikuHipster.middle_line
-  puts HaikuHipster.bottom_line
+#  puts HaikuGadget.haiku "\n"
+  puts HaikuGadget.top_line
+  puts HaikuGadget.middle_line
+  puts HaikuGadget.bottom_line
   puts ''
 end

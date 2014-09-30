@@ -1,4 +1,4 @@
-module HaikuHipster
+module HaikuGadget
 
   VERSION = '0.0.1'
 

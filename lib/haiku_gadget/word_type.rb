@@ -1,4 +1,4 @@
-module HaikuHipster
+module HaikuGadget
 
   class WordType
 

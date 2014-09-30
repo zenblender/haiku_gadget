@@ -1,6 +1,6 @@
 require File.expand_path('haiku_template.rb', File.dirname(__FILE__))
 
-module HaikuHipster
+module HaikuGadget
 
   # returns a haiku as either a single string or an array of strings, based on whether a delimiter was provided
   def self.haiku(delim = nil, haiku_template = nil)
@@ -28,15 +28,15 @@ module HaikuHipster
   end
 
   def self.top_line(word_templates = nil)
-    HaikuHipster.random_line(0, word_templates)
+    HaikuGadget.random_line(0, word_templates)
   end
 
   def self.middle_line(word_templates = nil)
-    HaikuHipster.random_line(1, word_templates)
+    HaikuGadget.random_line(1, word_templates)
   end
 
   def self.bottom_line(word_templates = nil)
-    HaikuHipster.random_line(2, word_templates)
+    HaikuGadget.random_line(2, word_templates)
   end
 
   # return just a single random line
