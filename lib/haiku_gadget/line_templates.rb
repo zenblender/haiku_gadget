@@ -55,7 +55,7 @@ module HaikuGadget
           WordTemplate.new(:adjective, 0, :common),
           WordTemplate.new(:mass_noun, 1)
         ], [
-          WordTemplate.new(:determiner, 1, :singular, 1),
+          WordTemplate.new(:determiner, 0, :singular, 1),
           WordTemplate.new(:adjective, 0, :singular, 1),
           WordTemplate.new(:noun, 1, :singular, 1),
           WordTemplate.custom('is like', 2),
