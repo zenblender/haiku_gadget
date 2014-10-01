@@ -89,6 +89,23 @@ module HaikuGadget
       out
     end
 
+    def self.contains_word_anywhere?(word)
+      @@dict.each do |key, array|
+        return true if array.flatten.include? word
+      end
+      false
+    end
+
+    def self.contains_valid_data_types?
+      @@dict.each do |key, array|
+        array.flatten.each do |item|
+          puts "error: #{item} in #{key.to_s} is a #{item.class}" if item.class != String
+          return false unless item.is_a? String
+        end
+      end
+      true
+    end
+
     # force load of dictionary from yaml file now
     def self.load(path = DEFAULT_DICT_PATH)
       dict = YAML.load_file(File.expand_path(path, File.dirname(__FILE__)))
@@ -96,8 +113,6 @@ module HaikuGadget
       WORD_TYPES.each do |k, wt|
         Dictionary.complete_plurality(dict, wt)
       end
-
-      #ap dict
 
       dict
     end

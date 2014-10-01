@@ -49,6 +49,24 @@ module HaikuGadget
         end
       end
 
+      it 'should contain some random expected words' do
+
+        %w(banana advise the sadly moon red my).each do |word|
+
+          expect(Dictionary.contains_word_anywhere? word).to eq true
+
+        end
+
+      end
+
+      # this test ensures that no words are being parsed as data types other than String,
+      # for example, the word 'no' gets parsed as false and needs to be in quotes in the YAML file
+      it 'should contain only string data types (inside arrays)' do
+
+        expect(Dictionary.contains_valid_data_types?).to eq true
+
+      end
+
     end
 
     describe 'with single possibility test dictionary' do
