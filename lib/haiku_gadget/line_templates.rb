@@ -138,7 +138,7 @@ module HaikuGadget
           WordTemplate.new(:determiner, 1, :singular, 1),
           WordTemplate.new(:adjective, 0, :singular, 1),
           WordTemplate.new(:noun, 1, :singular, 1),
-          WordTemplate.new(:verb_self, 1, :singularß, 1),
+          WordTemplate.new(:verb_self, 1, :singular, 1),
           WordTemplate.new(:adverb)
         ),
 
