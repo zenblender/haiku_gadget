@@ -46,6 +46,7 @@ module HaikuGadget
       # get a random template defined for the current row
       word_templates = HaikuTemplate.new.template_matrix[row_index]
     end
+
     # generate a HaikuTemplate object that only contains a single line with the desired template
     haiku_template = HaikuTemplate.new [word_templates]
     haiku_template.generate[0]

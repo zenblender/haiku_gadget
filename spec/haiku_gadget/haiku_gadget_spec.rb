@@ -58,20 +58,22 @@ module HaikuGadget
       dict_path = '../../spec/test_words_single.yml'
 
       haiku_template = HaikuTemplate.new [
-        [
+        LineTemplate.new(
           WordTemplate.new(:adjective, 1, :singular, 1),  # red
           WordTemplate.new(:noun, 1, :singular, 1),       # thing
           WordTemplate.new(:verb_self, 3, :singular, 1)   # meditates
-        ], [
+        ),
+        LineTemplate.new(
           WordTemplate.new(:determiner, 1, :plural, 1),   # the
           WordTemplate.new(:noun, 3, :plural, 1),         # samurais
           WordTemplate.new(:verb, 1, :plural, 1),         # see
           WordTemplate.new(:noun, 2, :singular, 2)        # zombie
-        ], [
+        ),
+        LineTemplate.new(
           WordTemplate.new(:adjective, 2, :any, 1),  # orange
           WordTemplate.new(:noun, 2, :any, 1),       # zombie(s)
           WordTemplate.new(:verb_self, 1, :any, 1)   # fight(s)
-        ]
+        )
       ]
 
       before(:each) do
@@ -127,9 +129,9 @@ module HaikuGadget
       it 'should return a haiku containing expected words' do
 
         haiku_template = HaikuTemplate.new [
-          [WordTemplate.new(:mass_noun, 5)],
-          [WordTemplate.new(:mass_noun, 7)],
-          [WordTemplate.new(:mass_noun, 5)]
+          LineTemplate.new(WordTemplate.new :mass_noun, 5),
+          LineTemplate.new(WordTemplate.new :mass_noun, 7),
+          LineTemplate.new(WordTemplate.new :mass_noun, 5)
         ]
 
         haiku = HaikuGadget.haiku nil, haiku_template
@@ -142,6 +144,31 @@ module HaikuGadget
         expect(five_syl_words).to include(haiku[0])
         expect(seven_syl_words).to include(haiku[1])
         expect(five_syl_words).to include(haiku[2])
+
+      end
+
+    end
+
+    describe 'with built-in line templates' do
+
+      it 'should not have invalid syllable defaults' do
+
+        template_pairs = [
+          [LineTemplates::ALL_TOP_LINES.flatten, 5],
+          [LineTemplates::ALL_MIDDLE_LINES.flatten, 7],
+          [LineTemplates::ALL_BOTTOM_LINES.flatten, 5]
+        ]
+
+        template_pairs.each do |pair|
+          line_templates, syllables = pair
+
+          line_templates.each do |line_template|
+
+            expect(line_template.current_syllables).to be <= syllables
+
+          end
+
+        end
 
       end
 
