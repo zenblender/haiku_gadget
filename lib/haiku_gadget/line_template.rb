@@ -23,46 +23,6 @@ module HaikuGadget
       @word_templates.map { |w| w.syllables }.inject(:+)
     end
 
-    def get_valid_word_indices
-      out = []
-      @word_templates.each_index do |i|
-        out << i unless @word_templates[i].word_type.base_symbol == :custom
-      end
-      out
-    end
-
-    def increase_row_syllable
-      valid_word_indices = get_valid_word_indices
-
-      increase_syllable_index = nil
-      loop do
-        increase_syllable_index = increased_row_syllable_index valid_word_indices
-        break if increase_syllable_index || valid_word_indices.length == 0
-      end
-      if increase_syllable_index
-        @word_templates[increase_syllable_index].syllables += 1
-        increase_syllable_index
-      else
-        nil
-      end
-    end
-
-    def increased_row_syllable_index(valid_word_indices)
-      if valid_word_indices.length > 0
-        word_index = weighted_sample_index valid_word_indices
-        if @word_templates[word_index].word_type.words?(
-          @word_templates[word_index].syllables + 1,
-          @word_templates[word_index].plurality
-        )
-          word_index
-        else
-          # dictionary has no words of this type, remove this index so it isn't checked in the future
-          valid_word_indices.delete word_index
-          nil
-        end
-      end
-    end
-
     def complete_syllables(required_syllables)
       while current_syllables < required_syllables
         increased_syllable_index = increase_row_syllable
@@ -104,17 +64,58 @@ module HaikuGadget
       words
     end
 
-    # where necessary, convert 'a' to 'an'
-    def self.convert_a_to_an(words)
-      words.each_index do |i|
-        if words[i] == 'a' && (i < (words.length - 1)) && %w(a e i o u).include?(words[i + 1].slice(0))
-          # current word is 'a', there are more words after this one, and the next one starts with a, e, i, o or u
-          words[i] = 'an'
+    private
+
+      def get_valid_word_indices
+        out = []
+        @word_templates.each_index do |i|
+          out << i unless @word_templates[i].word_type.base_symbol == :custom
+        end
+        out
+      end
+
+
+      def increase_row_syllable
+        valid_word_indices = get_valid_word_indices
+
+        increase_syllable_index = nil
+        loop do
+          increase_syllable_index = increased_row_syllable_index valid_word_indices
+          break if increase_syllable_index || valid_word_indices.length == 0
+        end
+        if increase_syllable_index
+          @word_templates[increase_syllable_index].syllables += 1
+          increase_syllable_index
+        else
+          nil
         end
       end
-    end
 
-    private
+      def increased_row_syllable_index(valid_word_indices)
+        if valid_word_indices.length > 0
+          word_index = weighted_sample_index valid_word_indices
+          if @word_templates[word_index].word_type.words?(
+            @word_templates[word_index].syllables + 1,
+            @word_templates[word_index].plurality
+          )
+            word_index
+          else
+            # dictionary has no words of this type, remove this index so it isn't checked in the future
+            valid_word_indices.delete word_index
+            nil
+          end
+        end
+      end
+
+      # where necessary, convert 'a' to 'an'
+      def self.convert_a_to_an(words)
+        words.each_index do |i|
+          if words[i] == 'a' && (i < (words.length - 1)) && %w(a e i o u).include?(words[i + 1].slice(0))
+            # current word is 'a', there are more words after this one, and the next one starts with a, e, i, o or u
+            words[i] = 'an'
+          end
+        end
+      end
 
       # give more weight to words that have >0 syllables already,
       # which reduces the number of words per line slightly
