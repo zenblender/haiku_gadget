@@ -18,11 +18,11 @@ module HaikuGadget
 
       # imperative action (command)
       LineTemplate.new(
-        WordTemplate.new(:adverb, 2),
         WordTemplate.new(:verb, 1, :plural),
         WordTemplate.new(:determiner, 0, :plural),
         WordTemplate.new(:adjective, 0, :plural),
-        WordTemplate.new(:noun, 1, :plural)
+        WordTemplate.new(:noun, 1, :plural),
+        WordTemplate.new(:verb_adverb)
       ),
 
       # mass/abstract noun is adj
@@ -97,7 +97,7 @@ module HaikuGadget
           WordTemplate.new(:determiner, 1, :singular, 2),
           WordTemplate.new(:adjective, 0, :singular, 2),
           WordTemplate.new(:noun, 1, :singular, 2),
-          WordTemplate.new(:adverb)
+          WordTemplate.new(:verb_adverb)
         ),
 
         LineTemplate.new(
@@ -106,7 +106,7 @@ module HaikuGadget
           WordTemplate.new(:determiner, 0, :plural, 2),
           WordTemplate.new(:adjective, 0, :plural, 2),
           WordTemplate.new(:noun, 1, :plural, 2),
-          WordTemplate.new(:adverb)
+          WordTemplate.new(:verb_adverb)
         )
       ],
 
@@ -139,7 +139,7 @@ module HaikuGadget
           WordTemplate.new(:adjective, 0, :singular, 1),
           WordTemplate.new(:noun, 1, :singular, 1),
           WordTemplate.new(:verb_self, 1, :singular, 1),
-          WordTemplate.new(:adverb)
+          WordTemplate.new(:verb_adverb)
         ),
 
         LineTemplate.new(  
@@ -148,7 +148,7 @@ module HaikuGadget
           WordTemplate.new(:adjective, 0, :plural, 1),
           WordTemplate.new(:noun, 1, :plural, 1),
           WordTemplate.new(:verb_self, 1, :plural, 1),
-          WordTemplate.new(:adverb)
+          WordTemplate.new(:verb_adverb)
         )
       ]
     ]
@@ -174,8 +174,30 @@ module HaikuGadget
       ]
     ]
 
+    SHORT_LINES = [
+      [
+        LineTemplate.new(
+          WordTemplate.custom([
+            'it is', 'it was',
+            'that is', 'that was',
+            'we are', 'we were',
+            'they are', 'they were'
+          ], 2),
+          WordTemplate.new(:adjective_adverb),
+          WordTemplate.new(:adjective, 1, :singular)
+        ),
+
+        LineTemplate.new(
+          WordTemplate.custom(%w(it's that's we're they're), 1),
+          WordTemplate.new(:adjective_adverb),
+          WordTemplate.new(:adjective, 1, :singular)
+        )
+      ]
+    ]
+
     ALL_TOP_LINES = [
-      COMMON_LINES
+      COMMON_LINES,
+      SHORT_LINES
     ].flatten(1)
 
     ALL_MIDDLE_LINES = [
@@ -185,7 +207,8 @@ module HaikuGadget
 
     ALL_BOTTOM_LINES = [
       COMMON_LINES,
-      BOTTOM_LINES
+      BOTTOM_LINES,
+      SHORT_LINES
     ].flatten(1)
 
   end

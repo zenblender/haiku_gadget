@@ -17,7 +17,7 @@ module HaikuGadget
         word_type = Dictionary::WORD_TYPES[base_symbol_or_word_type]
       end
 
-      fail 'unknown word type' unless word_type
+      fail "unknown word type '#{base_symbol_or_word_type.to_s}'" unless word_type
 
       # check if template plurality needs to be set or changed
       if word_type.can_be_plural

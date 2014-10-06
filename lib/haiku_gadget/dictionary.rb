@@ -12,12 +12,13 @@ module HaikuGadget
       determiner:             WordType.new(:determiner, true),
       to_be:                  WordType.new(:to_be, true),
       adjective:              WordType.new(:adjective, true),
+      adjective_adverb:       WordType.new(:adjective_adverb),
       noun:                   WordType.new(:noun, true, :plural),
       mass_noun:              WordType.new(:mass_noun),
       mass_noun_determiner:   WordType.new(:mass_noun_determiner),
       verb:                   WordType.new(:verb, true, :singular),
       verb_self:              WordType.new(:verb_self, true, :singular),
-      adverb:                 WordType.new(:adverb),
+      verb_adverb:            WordType.new(:verb_adverb),
       transition_join:        WordType.new(:transition_join)
     }
 
