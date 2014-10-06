@@ -67,6 +67,19 @@ module HaikuGadget
 
       end
 
+      it 'should return word(s) specifically from the common set' do
+
+        line_template = LineTemplate.new(
+          WordTemplate.new(:adjective, 1, :common),
+          WordTemplate.new(:adjective, 1, :common),
+          WordTemplate.new(:adjective, 1, :common)
+        )
+        words = line_template.real_words
+
+        expect(words.compact.length).to eq 3
+
+      end
+
     end
 
     describe 'with basic line template' do

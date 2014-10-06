@@ -24,8 +24,8 @@ module HaikuGadget
       # this is a redundant error check and should not happen
       plurality = [:singular, :plural].sample if @can_be_plural && plurality == :none
 
-      if @can_be_plural && [:singular, :plural].include?(plurality)
-        # word can be plural
+      if plurality == :common || (@can_be_plural && [:singular, :plural].include?(plurality))
+        # word can be plural or is from the common set
         "#{@base_symbol.to_s}_#{plurality.to_s}".to_sym
       else
         # word type is not relevent to plurality
