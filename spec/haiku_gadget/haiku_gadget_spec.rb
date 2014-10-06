@@ -69,6 +69,66 @@ module HaikuGadget
 
     end
 
+    describe 'with basic line template' do
+
+      line_template = LineTemplate.new(
+        WordTemplate.new(:adjective, 0, :any, 1),
+        WordTemplate.new(:noun, 1, :any, 1),
+        WordTemplate.new(:verb_self, 1, :any, 1)
+      )
+
+      expected_dist_length = LineTemplate::EXISTING_SYLLABLES_PRIORITY * 2 + 1
+
+      it 'should give the correct weighted word index distribution' do
+
+        # word templates that start with 0 syllables are less likely to be
+        # selected for adding syllables (prefer fewer words per line)
+        weighted_word_indices = line_template.clone.send :weighted_word_indices, [0, 1, 2]
+        
+        expect(weighted_word_indices.length).to be expected_dist_length
+
+        # index 0 should be in there once
+        expect(weighted_word_indices.select { |n| n == 0 }.length).to eq 1
+        # and indeices 1 and 2 should each be in there LineTemplate::EXISTING_SYLLABLES_PRIORITY times
+        expect(weighted_word_indices.select { |n| n == 1 }.length).to eq LineTemplate::EXISTING_SYLLABLES_PRIORITY
+        expect(weighted_word_indices.select { |n| n == 2 }.length).to eq LineTemplate::EXISTING_SYLLABLES_PRIORITY
+
+      end
+
+      it 'should statistically favor existing syllable words' do
+        # test the actual results of the resulting weighted indexes
+        word_indices = []
+        10000.times do
+          curr_line_template = line_template.clone
+          word_indices << curr_line_template.send(:weighted_sample_index, [0, 1, 2])
+        end
+
+        word_index_counts = []
+        3.times do |i|
+          word_index_counts[i] = word_indices.select { |n| n == i }.length
+        end
+
+        expected_percs = []
+        expected_percs[0] = (1 / expected_dist_length.to_f) * 100
+        expected_percs[1] = (LineTemplate::EXISTING_SYLLABLES_PRIORITY / expected_dist_length.to_f) * 100
+        expected_percs[2] = (LineTemplate::EXISTING_SYLLABLES_PRIORITY / expected_dist_length.to_f) * 100
+
+        threshold_perc = 3
+
+        3.times do |i|
+          actual_perc = (word_index_counts[i] / word_indices.length.to_f) * 100
+          puts "stats for word index #{i} -- expected: #{expected_percs[i]}%, actual: #{actual_perc}%"
+
+          low_perc = expected_percs[i] - threshold_perc
+          high_perc = expected_percs[i] + threshold_perc
+          allowed_range = (low_perc...high_perc)
+          expect(allowed_range).to include actual_perc
+        end
+
+      end
+
+    end
+
     describe 'with single possibility test dictionary' do
       # these tests use a yaml file in which the randomness is removed because
       # there is only one word of each type in the dictionary

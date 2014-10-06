@@ -5,6 +5,10 @@ module HaikuGadget
 
   class LineTemplate
 
+    # the relative likelyhood that a word with existing syllables is going to be
+    # chosen over one that has no syllables (for example, 3 means 3 times as likely)
+    EXISTING_SYLLABLES_PRIORITY = 3
+
     attr_reader :word_templates
 
     def initialize(*word_templates)
@@ -45,7 +49,7 @@ module HaikuGadget
 
     def increased_row_syllable_index(valid_word_indices)
       if valid_word_indices.length > 0
-        word_index = valid_word_indices.sample
+        word_index = weighted_sample_index valid_word_indices
         if @word_templates[word_index].word_type.words?(
           @word_templates[word_index].syllables + 1,
           @word_templates[word_index].plurality
@@ -108,7 +112,34 @@ module HaikuGadget
           words[i] = 'an'
         end
       end
-    end    
+    end
+
+    private
+
+      # give more weight to words that have >0 syllables already,
+      # which reduces the number of words per line slightly
+      def weighted_sample_index(valid_word_indices)
+
+        weighted_word_indices(valid_word_indices).sample
+
+      end
+
+      def weighted_word_indices(valid_word_indices)
+
+        out = []
+        valid_word_indices.each do |valid_word_index|
+          if @word_templates[valid_word_index].syllables > 0
+            # weight this word more heavily
+            EXISTING_SYLLABLES_PRIORITY.times do
+              out << valid_word_index
+            end
+          else
+            out << valid_word_index
+          end
+        end
+        out
+
+      end
 
   end
 

@@ -25,8 +25,8 @@ module HaikuGadget
         WordTemplate.new(:noun, 1, :plural)
       ),
 
+      # mass/abstract noun is adj
       LineTemplate.new(
-        # mass/abstract noun is adj
         WordTemplate.new(:mass_noun_determiner),
         WordTemplate.new(:adjective, 0, :common),
         WordTemplate.new(:mass_noun, 1),
@@ -34,8 +34,8 @@ module HaikuGadget
         WordTemplate.new(:adjective, 1, :any)
       ),
 
+      # noun(s) of mass/abstract noun acts
       LineTemplate.new(
-        # noun(s) of mass/abstract noun acts
         WordTemplate.new(:determiner, 0, :any, 1),
         WordTemplate.new(:adjective, 0, :any, 1),
         WordTemplate.new(:noun, 1, :any, 1),
@@ -44,8 +44,8 @@ module HaikuGadget
         WordTemplate.new(:verb_self, 1, :any, 1)
       ),
 
+      # adj noun is adj
       LineTemplate.new(
-        # adj noun is adj
         WordTemplate.new(:adjective, 0, :any, 1),
         WordTemplate.new(:noun, 1, :any, 1),
         WordTemplate.new(:to_be, 1, :any, 1),
