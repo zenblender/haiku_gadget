@@ -89,10 +89,10 @@ module HaikuGadget
         )
       ],
 
-      # i/we/they act on noun(s)
+      # i/we/they/you act on noun(s)
       [
         LineTemplate.new(
-          WordTemplate.custom(%w(i we they), 1),
+          WordTemplate.custom(%w(i we they you), 1),
           WordTemplate.new(:verb, 1, :plural),
           WordTemplate.new(:determiner, 1, :singular, 2),
           WordTemplate.new(:adjective, 0, :singular, 2),
@@ -101,7 +101,7 @@ module HaikuGadget
         ),
 
         LineTemplate.new(
-          WordTemplate.custom(%w(i we they), 1),
+          WordTemplate.custom(%w(i we they you), 1),
           WordTemplate.new(:verb, 1, :plural),
           WordTemplate.new(:determiner, 0, :plural, 2),
           WordTemplate.new(:adjective, 0, :plural, 2),
