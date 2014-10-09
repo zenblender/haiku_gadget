@@ -9,17 +9,21 @@ module HaikuGadget
     DEFAULT_DICT_PATH = '../words.yml'
 
     WORD_TYPES = {
-      determiner:             WordType.new(:determiner, true),
-      to_be:                  WordType.new(:to_be, true),
-      adjective:              WordType.new(:adjective, true),
-      adjective_adverb:       WordType.new(:adjective_adverb),
-      noun:                   WordType.new(:noun, true, :plural),
-      mass_noun:              WordType.new(:mass_noun),
-      mass_noun_determiner:   WordType.new(:mass_noun_determiner),
-      verb:                   WordType.new(:verb, true, :singular),
-      verb_self:              WordType.new(:verb_self, true, :singular),
-      verb_adverb:            WordType.new(:verb_adverb),
-      transition_join:        WordType.new(:transition_join)
+      pronoun:                    WordType.new(:pronoun, true),
+      # pronoun_pre_singular_verb:  WordType.new(:pronoun_pre_singular_verb),
+      # pronoun_pre_plural_verb:    WordType.new(:pronoun_pre_plural_verb),
+      pronoun_post:               WordType.new(:pronoun_post),
+      determiner:                 WordType.new(:determiner, true),
+      to_be:                      WordType.new(:to_be, true),
+      adjective:                  WordType.new(:adjective, true),
+      adjective_adverb:           WordType.new(:adjective_adverb),
+      noun:                       WordType.new(:noun, true, :plural),
+      mass_noun:                  WordType.new(:mass_noun),
+      mass_noun_determiner:       WordType.new(:mass_noun_determiner),
+      verb:                       WordType.new(:verb, true, :singular),
+      verb_self:                  WordType.new(:verb_self, true, :singular),
+      verb_adverb:                WordType.new(:verb_adverb),
+      transition_join:            WordType.new(:transition_join)
     }
 
     def self.suffixed_symbol(base_symbol, suffix_symbol)
