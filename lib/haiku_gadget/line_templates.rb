@@ -7,60 +7,56 @@ module HaikuGadget
 
     COMMON_LINES = [
 
-      # noun(s) act on mass/abstract noun
-      LineTemplate.new(
-        WordTemplate.new(:determiner, 0, :any, 1),
-        WordTemplate.new(:noun, 1, :any, 1),
-        WordTemplate.new(:verb, 1, :any, 1),
-        WordTemplate.new(:mass_noun_determiner),
-        WordTemplate.new(:mass_noun, 1)
-      ),
+      [
+        # adj noun is adj
+        LineTemplate.new(
+          WordTemplate.new(:adjective, 0, :any, 1),
+          WordTemplate.new(:noun, 1, :any, 1),
+          WordTemplate.new(:to_be, 1, :any, 1),
+          WordTemplate.new(:adjective, 1, :any, 1)
+        ),
 
-      # imperative action (command)
-      LineTemplate.new(
-        WordTemplate.new(:verb, 1, :plural),
-        WordTemplate.new(:determiner, 0, :plural),
-        WordTemplate.new(:adjective, 0, :plural),
-        WordTemplate.new(:noun, 1, :plural),
-        WordTemplate.new(:verb_adverb)
-      ),
+        # mass/abstract noun is adj
+        LineTemplate.new(
+          WordTemplate.new(:mass_noun_determiner),
+          WordTemplate.new(:adjective, 0, :common),
+          WordTemplate.new(:mass_noun, 1),
+          WordTemplate.new(:to_be, 1, :singular),
+          WordTemplate.new(:adjective_adverb),
+          WordTemplate.new(:adjective, 1, :any)
+        )
+      ],
 
-      # imperative action (command) with double mass nouns
-      LineTemplate.new(
-        WordTemplate.new(:verb, 1, :plural),
-        WordTemplate.custom('the', 1),  # TODO: Make custom words optional (allow increase from 0 default syllables)
-        WordTemplate.new(:adjective, 0, :common),
-        WordTemplate.new(:mass_noun, 1),
-        WordTemplate.new(:mass_noun, 1)
-      ),
+      [
+        # imperative action (command)
+        LineTemplate.new(
+          WordTemplate.new(:verb, 1, :plural),
+          WordTemplate.new(:determiner, 0, :plural),
+          WordTemplate.new(:adjective, 0, :plural),
+          WordTemplate.new(:noun, 1, :plural),
+          WordTemplate.new(:verb_adverb)
+        ),
 
-      # mass/abstract noun is adj
-      LineTemplate.new(
-        WordTemplate.new(:mass_noun_determiner),
-        WordTemplate.new(:adjective, 0, :common),
-        WordTemplate.new(:mass_noun, 1),
-        WordTemplate.new(:to_be, 1, :singular),
-        WordTemplate.new(:adjective_adverb),
-        WordTemplate.new(:adjective, 1, :any)
-      ),
+        # noun(s) act on mass/abstract noun
+        LineTemplate.new(
+          WordTemplate.new(:determiner, 0, :any, 1),
+          WordTemplate.new(:noun, 1, :any, 1),
+          WordTemplate.new(:verb, 1, :any, 1),
+          WordTemplate.new(:mass_noun_determiner),
+          WordTemplate.new(:mass_noun, 1)
+        ),
 
-      # noun(s) of mass/abstract noun acts
-      LineTemplate.new(
-        WordTemplate.new(:determiner, 0, :any, 1),
-        WordTemplate.new(:adjective, 0, :any, 1),
-        WordTemplate.new(:noun, 1, :any, 1),
-        WordTemplate.custom('of', 1),
-        WordTemplate.new(:mass_noun, 1),
-        WordTemplate.new(:verb_self, 1, :any, 1)
-      ),
+        # pronoun(s) act on noun(s)
+        LineTemplate.new(
+          WordTemplate.new(:pronoun, 1, :any, 1),
+          WordTemplate.new(:verb, 1, :any, 1),
+          WordTemplate.new(:determiner, 1, :singular, 2),
+          WordTemplate.new(:adjective, 0, :singular, 2),
+          WordTemplate.new(:noun, 1, :singular, 2),
+          WordTemplate.new(:verb_adverb)
+        )
 
-      # adj noun is adj
-      LineTemplate.new(
-        WordTemplate.new(:adjective, 0, :any, 1),
-        WordTemplate.new(:noun, 1, :any, 1),
-        WordTemplate.new(:to_be, 1, :any, 1),
-        WordTemplate.new(:adjective, 1, :any, 1)
-      ),
+      ],
 
       # metaphors
       [
@@ -120,17 +116,17 @@ module HaikuGadget
           WordTemplate.new(:noun, 1, :plural)
         ),
 
-      ],
+        # noun(s) of mass/abstract noun acts
+        LineTemplate.new(
+          WordTemplate.new(:determiner, 0, :any, 1),
+          WordTemplate.new(:adjective, 0, :any, 1),
+          WordTemplate.new(:noun, 1, :any, 1),
+          WordTemplate.custom('of', 1),
+          WordTemplate.new(:mass_noun, 1),
+          WordTemplate.new(:verb_self, 1, :any, 1)
+        )
 
-      # pronoun(s) act on noun(s)
-      LineTemplate.new(
-        WordTemplate.new(:pronoun, 1, :any, 1),
-        WordTemplate.new(:verb, 1, :any, 1),
-        WordTemplate.new(:determiner, 1, :singular, 2),
-        WordTemplate.new(:adjective, 0, :singular, 2),
-        WordTemplate.new(:noun, 1, :singular, 2),
-        WordTemplate.new(:verb_adverb)
-      ),
+      ],
 
       # noun(s) act on noun(s)
       [
@@ -149,7 +145,30 @@ module HaikuGadget
           WordTemplate.new(:determiner, 0, :plural, 2),
           WordTemplate.new(:noun, 1, :plural, 2)
         )
+
+      ],
+
+      # double mass nouns
+      [
+        # imperative action (command) with double mass noun
+        LineTemplate.new(
+          WordTemplate.new(:verb, 1, :plural),
+          WordTemplate.custom('the', 1),  # TODO: Make custom words optional (allow increase from 0 default syllables)
+          #WordTemplate.new(:adjective, 0, :common),
+          WordTemplate.new(:mass_noun, 1),
+          WordTemplate.new(:mass_noun, 1)
+        ),
+
+        # double mass noun acts
+        LineTemplate.new(
+          WordTemplate.custom('the', 1),  # TODO: Make custom words optional (allow increase from 0 default syllables)
+          WordTemplate.new(:mass_noun, 1),
+          WordTemplate.new(:mass_noun, 1),
+          WordTemplate.new(:verb_self, 1, :singular)
+        )
+
       ]
+
     ]
 
     MIDDLE_AND_BOTTOM_LINES = [
@@ -173,7 +192,7 @@ module HaikuGadget
           WordTemplate.new(:verb_adverb)
         ),
 
-        LineTemplate.new(  
+        LineTemplate.new(
           WordTemplate.new(:transition_join),
           WordTemplate.new(:determiner, 0, :plural, 1),
           WordTemplate.new(:adjective, 0, :plural, 1),
@@ -185,6 +204,15 @@ module HaikuGadget
     ]
 
     SHORT_LINES = [
+
+      # adjective noun
+      LineTemplate.new(
+        WordTemplate.new(:determiner, 0, :any, 1),
+        WordTemplate.new(:adjective, 1, :any, 1),
+        WordTemplate.new(:noun, 1, :any, 1)
+      ),
+
+      # adjective statement
       [
         LineTemplate.new(
           WordTemplate.custom([
